@@ -1,30 +1,26 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:titanium_furnace_calculator/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  testWidgets('Furnace Calculator screen loads', (WidgetTester tester) async {
+    // Launch the application.
+    await tester.pumpWidget(const FurnaceCalculatorApp());
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    // Verify the screen title.
+    expect(find.text('Titanium Furnace Calculator'), findsOneWidget);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    // Verify the initial furnace weight.
+    expect(find.text('0.00 kg'), findsOneWidget);
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // Verify material selection.
+    expect(find.byType(DropdownButtonFormField<String>), findsOneWidget);
+
+    // Verify the weight input.
+    expect(find.byType(TextField), findsOneWidget);
+
+    // Verify the Add Material button.
+    expect(find.byIcon(Icons.add), findsOneWidget);
   });
 }
